@@ -5,9 +5,9 @@ export default class THeader extends React.Component {
     return (
       <thead>
         <tr>
-          <th>Название</th>
-          <th>Цена</th>
-          <th>Количество</th>
+          <th className="nameProduct">Название</th>
+          <th className="costProduct">Цена</th>
+          <th className="countProduct">Количество</th>
         </tr>
       </thead>
     );

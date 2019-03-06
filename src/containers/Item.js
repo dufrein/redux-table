@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 class Item extends React.Component {
   render() {
     this.baseData = this.props.baseData.productsBase;
-    const buttonMinus = (parent => {
+    const button = (parent => {
       if (parent === "Basket") {
         return (
           <td>
@@ -45,21 +45,18 @@ class Item extends React.Component {
         <td> {this.props.itemData.name}</td>
         <td>{this.props.itemData.price}</td>
         <td>{this.props.itemData.count}</td>
-        {buttonMinus}
+        {button}
       </tr>
     );
   }
   buttonClickAdd = () => {
-    this.baseData[this.props.itemData.id - 1].count++;
-    this.props.changeCountAdd(this.baseData);
+    this.props.changeCountAdd(this.props.itemData.id);
   };
   buttonClickDelete = () => {
-    this.baseData[this.props.itemData.id - 1].count--;
-    this.props.changeCountDelete(this.baseData);
+    this.props.changeCountDelete(this.props.itemData.id);
   };
   buttonClickDeleteAll = () => {
-    this.baseData[this.props.itemData.id - 1].count = 0;
-    this.props.changeCountDeleteAll(this.baseData);
+    this.props.changeCountDeleteAll(this.props.itemData.id);
   };
 }
 

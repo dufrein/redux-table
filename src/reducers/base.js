@@ -1,3 +1,10 @@
+import {
+  CHANGE_COUNT_ADD,
+  CHANGE_COUNT_DELETE,
+  CHANGE_COUNT_DELETE_ALL,
+  CHANGE_COUNT_CLEAR_BASKET
+} from "../actionTypes";
+
 const initialState = {
   productsBase: [
     { name: "apple", id: 1, price: 11, count: 0 },
@@ -10,14 +17,44 @@ const initialState = {
 
 export const baseReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "CHANGE_COUNT_ADD":
-      return { ...state, productsBase: action.payload };
-    case "CHANGE_COUNT_DELETE":
-      return { ...state, productsBase: action.payload };
-    case "CHANGE_COUNT_DELETE_ALL":
-      return { ...state, productsBase: action.payload };
-    case "CHANGE_COUNT_CLEAR_BASKET":
-      return { ...state, productsBase: action.payload };
+    case CHANGE_COUNT_ADD:
+      return {
+        ...state,
+        productsBase: state.productsBase.map(item => {
+          if (item.id === action.payload) {
+            item.count++;
+          }
+          return item;
+        })
+      };
+    case CHANGE_COUNT_DELETE:
+      return {
+        ...state,
+        productsBase: state.productsBase.map(item => {
+          if (item.id === action.payload) {
+            item.count--;
+          }
+          return item;
+        })
+      };
+    case CHANGE_COUNT_DELETE_ALL:
+      return {
+        ...state,
+        productsBase: state.productsBase.map(item => {
+          if (item.id === action.payload) {
+            item.count = 0;
+          }
+          return item;
+        })
+      };
+    case CHANGE_COUNT_CLEAR_BASKET:
+      return {
+        ...state,
+        productsBase: state.productsBase.map(item => {
+          item.count = 0;
+          return item;
+        })
+      };
     default:
       return state;
   }
